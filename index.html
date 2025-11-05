@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaksi Love untuk Eca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7),
+                         0 0 20px rgba(255, 20, 147, 0.5),
+                         0 0 30px rgba(255, 0, 128, 0.3);
+            animation: pulse 3s infinite alternate;
+            position: relative;
+            z-index: 10;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .love-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.9);
+        }
+
+        .love-button:active {
+            transform: scale(0.9);
+        }
+
+        .galaxy {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--color);
+            transform: rotate(45deg);
+            animation: float var(--duration) infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        .heart:before, .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: var(--color);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            z-index: 5;
+            animation: float-up 4s forwards;
+        }
+
+        .nailong {
+            position: absolute;
+            width: 120px;
+            height: auto;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5;
+            animation: bounce 5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(255, 105, 180, 0.7),
+                             0 0 20px rgba(255, 20, 147, 0.5),
+                             0 0 30px rgba(255, 0, 128, 0.3);
+            }
+            100% {
+                transform: scale(1.05);
+                text-shadow: 0 0 15px rgba(255, 105, 180, 0.9),
+                             0 0 25px rgba(255, 20, 147, 0.7),
+                             0 0 35px rgba(255, 0, 128, 0.5);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-20px);
+            }
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .message {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy" id="galaxy"></div>
+    
+    <div class="container">
+        <h1 class="title">Semangat ya Eca</h1>
+        <p class="subtitle">klik lovenya</p>
+        <button class="love-button" id="loveButton">❤️</button>
+    </div>
+    
+    <img src="eca1.png" alt="Nailong" class="nailong">
+    <p class="message">BY, abg teknik</p>
+
+    <script>
+        // Membuat bintang dan hati di galaksi
+        const galaxy = document.getElementById('galaxy');
+        const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#dc143c', '#ff00ff', '#ff1493', '#ff69b4'];
+        
+        // Membuat bintang
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            galaxy.appendChild(star);
+        }
+        
+        // Membuat hati berbentuk love
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${Math.random() * 100}%`;
+            heart.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+            heart.style.setProperty('--duration', `${Math.random() * 5 + 5}s`);
+            heart.style.width = `${Math.random() * 20 + 10}px`;
+            heart.style.height = heart.style.width;
+            galaxy.appendChild(heart);
+        }
+        
+        // Efek ketika tombol love diklik
+        const loveButton = document.getElementById('loveButton');
+        loveButton.addEventListener('click', function() {
+            // Membuat hati melayang
+            for (let i = 0; i < 15; i++) {
+                createFloatingHeart();
+            }
+            
+            // Efek suara (opsional)
+            playLoveSound();
+        });
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            heart.style.left = `${Math.random() * 80 + 10}%`;
+            heart.style.fontSize = `${Math.random() * 20 + 20}px`;
+            
+            document.body.appendChild(heart);
+            
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        function playLoveSound() {
+            // Membuat suara sederhana menggunakan Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 1);
+        }
+        
+        // Efek paralaks untuk galaksi saat mouse bergerak
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const stars = document.querySelectorAll('.star, .heart');
+            stars.forEach(star => {
+                const speed = parseFloat(star.style.width) / 5;
+                const xMove = (x - 0.5) * speed;
+                const yMove = (y - 0.5) * speed;
+                
+                star.style.transform = `translate(${xMove}px, ${yMove}px) ${star.classList.contains('heart') ? 'rotate(45deg)' : ''}`;
+            });
+        });
+    </script>
+</body>
+</html>
